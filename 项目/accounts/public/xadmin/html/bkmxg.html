@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../layui.main/dist/css/layui.css">
+    <script src="../../js/jQuery.mini.js"></script>
+    <script src="../../layui.main/dist/layui.js"></script>
+    <style>
+        body #box {
+            width: 500px;
+            height: 200px;
+            margin: 100px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <form class="layui-form" id="box" action="">
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 100px;">博客名修改：</label>
+            <div class="layui-input-inline">
+                <input type="text" name="title" required lay-verify="required" placeholder="请输入博客名" autocomplete="off"
+                    class="layui-input" id="bkm">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" id="tj">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+
+    <script>
+        $('#tj').on('click', function (e) {
+            e.preventDefault()
+            if($("#bkm").val()==''){
+                return layer.msg('博客名不能为空！', { icon: 2, time: 1000 });
+            }
+            $.post('http://127.0.0.1:8080/xadmin/blogs/update', { title: $("#bkm").val() }, function (res) {
+                if (res.status !== 0) {
+                    return console.log(res.message);
+                }
+                layer.msg('修改成功！', { icon: 6, time: 1000 });
+
+
+            })
+        })
+    </script>
+</body>
+
+</html>

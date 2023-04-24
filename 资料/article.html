@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../项目/accounts/public/css/article.css">
+</head>
+<body>
+    <div class="title">
+        <div class="title-left">
+            <h2>博客-zhang's Blog</h2>
+        </div>
+        <div class="title-right">
+
+            <!-- 放大后的导航栏 -->
+            <ul id="title-right-nav">
+                <% header.forEach(item=> { %>
+                    <li><span class="<%= item.icon %>"></span>
+                        <%= item.name %>
+                    </li>
+                    <% }) %>
+            </ul>
+        </div>
+        <div class="caida">
+            <img src="./img/caida.png" alt="" id="caidaBtn">
+            <div class="neir">
+                <!-- 缩小后的导航栏 -->
+                <ul id="caida-nav">
+                    <% header.forEach(item=> { %>
+                        <li><span class="<%= item.icon %>"></span>
+                            <%= item.name %>
+                        </li>
+                        <% }) %>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

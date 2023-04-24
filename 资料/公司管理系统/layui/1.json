@@ -1,0 +1,12 @@
+{
+    "code":0,
+    "msg":"",
+    "count":50,
+    "data": [{
+        "id":1000,
+        "usenname":"user-0",
+        "sex":"女",
+        "city":"城市-0",
+        "sign":"签名"
+    }]
+}

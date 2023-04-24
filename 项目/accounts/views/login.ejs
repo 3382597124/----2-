@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+    <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.cn/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+      <script src="https://cdn.jsdelivr.cn/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+    <title>Document</title>
+
+    <script src="/js/jQuery.mini.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/layui.main/dist/css/layui.css">
+    <link rel="stylesheet" href="/css/login.css">
+
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="box">
+            <h1 class="title">用户登录</h1>
+            <form action="" class="laiyui-form" id="rag_dl">
+                <input type="text" class="loginIpt" placeholder="账号" name="username" id="dl-username">
+                <input type="text" class="loginIpt" placeholder="密码" name="password">
+                <span style="font-size: 8px; color: rgb(196, 50, 50);">*密码必须由数字、字母两种字符组成，长度在6-15位之间</span>
+                <button class="loginBtn">登录</button>
+                <button class="loginBtn" id="dl_zc">去注册</button>
+            </form>
+            <div class="botm">
+                <span>有问题?</span>
+                <a href="http://www.baidu.com">请联系站长</a>
+            </div>
+        </div>
+        <div class="box2">
+            <h1 class="title2">用户注册</h1>
+
+
+            <form   class="laiyui-form" id="rag_zc" enctype="multipart/form-data">
+                <div id="picture" title="上传头像">
+                <input type="file" name="picture" multiple="multiple" id="file" class="file-upload">
+                </div>
+                <input type="text" class="loginIpt" placeholder="账号" id="userName" name="userName">
+                <input type="password" class="loginIpt" placeholder="密码" id="password" name="password" style="margin-bottom: 5px;">
+                <span style="font-size: 8px; color: rgb(196, 50, 50);">*密码必须由数字、字母两种字符组成，长度在6-15位之间</span>
+                <input type="password" class="loginIpt" placeholder="确认密码" id="ntPassWord" name="ntPassWord" style="margin-bottom: 5px;">
+                <span style="font-size: 8px; color: rgb(196, 50, 50);">*请再次输入密码</span>
+                <input type="text" class="loginIpt" placeholder="邮箱" id="email" name="email">
+                <input type="submit" class="loginBtn2" id="zc" value="注册">
+                <button class="loginBtn2" id="zc_dl">去登录</button>
+            </form>
+            <div class="botm">
+                <span>有问题?</span>
+                <a href="http://www.baidu.com">请联系站长</a>
+            </div>
+        </div>
+
+
+        <canvas id="canvas"></canvas>
+    </div>
+</body>
+<script src="/layui.main/dist/layui.js"></script>
+<script src="/js/lz.js"></script>
+<script src="/js/login.js"></script>
+
+</html>

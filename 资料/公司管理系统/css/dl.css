@@ -1,0 +1,103 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+a{
+    text-decoration: none;
+}
+li{
+    list-style: none;
+}
+body{
+
+    background: url(../images/dl.jpg) no-repeat 100% 100% fixed; 
+}
+.box{
+    position: relative;
+    margin: 100px auto;
+    width: 1200px;
+    height: 500px;
+}
+.box .wz{
+    position: relative;
+    width: 700px;
+    height: 200px;
+}
+.box .wz h1{
+    font-size: 80px;
+    font-weight: 700;
+    letter-spacing: 30px;
+    color: #fff;
+    font-family: "楷体";
+}
+.box .wz h4{
+    position: absolute;
+    font-size: 25px;
+    font-family: "楷体";
+    color: #fff;
+    right: 0;
+    bottom: 40px;
+}
+.box .dlck{
+    position: absolute;
+    width: 400px;
+    height: 280px;
+    background: rgba(255, 255, 255, .5);
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+}
+.box .dlck .dl{
+    margin-top: 50px;
+}
+.box .dlck .sr1,.box .dlck .sr2{
+    width: 251px;
+    height: 40px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid skyblue; 
+    padding-left: 38px;
+}
+.box .dlck i{
+    position: absolute;
+    display: block;
+    width: 38px;
+    height: 40px;
+    top: 50px;
+    
+}
+.box .dlck .i2{
+    position: absolute;
+    display: block;
+    top: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.box .dlck .i2 img{
+    width: 25px;
+    height: 25px;
+}
+.box .dlck #dl-fxk{
+    width: 20px;
+    height: 20px;
+}
+.box .dlck .fxk{
+    position: relative;
+}
+.box .dlck .fxk span{
+    position: absolute;
+    margin-left: 5px;
+}
+.box .dlck .btn{
+    display: block;
+    margin-top: 20px;
+    width: 251px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 20px;
+    color: #000;
+}

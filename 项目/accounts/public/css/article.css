@@ -1,0 +1,223 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    overflow-x: hidden;
+    background-image: linear-gradient(to right, #f64f5a, #c96edc, #18bfe9);
+}
+
+.w {
+    margin: 0 auto;
+    max-width: 960px;
+}
+
+.title {
+    position: relative;
+    width: 100%;
+    height: 64px;
+    background-color: #fff;
+    line-height: 64px;
+    box-shadow: 0 5px 20px #898787;
+}
+
+.title .title-left h2 {
+    position: absolute;
+    left: 150px;
+    cursor: pointer;
+}
+
+.title .title-right ul {
+    position: absolute;
+    right: 200px;
+}
+
+.title .title-right ul li {
+    float: left;
+    list-style: none;
+    height: 100%;
+    text-align: center;
+    cursor: pointer;
+    margin-left: 10px
+}
+
+.title .title-right ul li span {
+    font-size: 18px;
+}
+
+.title .title-right ul li:hover {
+    font-size: 18px;
+    color: rgb(149, 11, 11);
+}
+
+.title .caida {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    right: 150px;
+    display: none;
+}
+
+.title .neir {
+    position: absolute;
+    background-image: linear-gradient(to right, #18bfe9, #c96edc, #f64f5a);
+    z-index: 2;
+    left: -80px;
+    display: none;
+}
+
+.title .neir ul li {
+    text-align: center;
+    width: 100px;
+    height: 40px;
+    margin: 5px 0px;
+    line-height: 40px;
+    border-bottom: 1px solid #501616;
+    cursor: pointer;
+}
+
+.title .neir ul li:hover {
+    font-size: 18px;
+    color: rgb(149, 11, 11);
+}
+
+.title .neir ul li:last-child {
+    margin-bottom: 0;
+}
+
+
+@media screen and (max-width:1226px) {
+    .title .caida {
+        display: block;
+    }
+
+}
+
+@media screen and (max-width:650px) {
+    .title .caida {
+        display: block;
+        right: 10px;
+    }
+
+}
+
+/* 标题 */
+.article-top {
+    position: relative;
+    margin-top: 20px;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 5px 5px 15px #565252;
+}
+
+.article #article-fh {
+    position: absolute;
+    left: 10px;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 20px;
+    background-image: linear-gradient(to right, #f64f5a, #c96edc, #18bfe9);
+}
+
+.article-top h1,
+.article-top p,
+.article-bottom h1 {
+    font-weight: bolder;
+}
+
+.article-bottom {
+    position: relative;
+    margin-top: 30px;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 5px 5px 15px #565252;
+}
+
+.article-bottom h1 {
+    border-bottom: 2px solid #000;
+    padding-bottom: 10px;
+}
+
+.article-bottom #article-bottom-content {
+    padding: 0 40px;
+    font-size: 18px;
+    margin-top: 15px;
+}
+
+.article-bottom .pl {
+    width: 100%;
+    height: 20px;
+}
+
+.article-bottom .pl button {
+    float: right;
+    width: 90px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    background-image: linear-gradient(to right, #f64f5a, #c96edc, #18bfe9);
+    cursor: pointer;
+
+    color: #fff;
+}
+
+.article .ly {
+    margin-top: 20px;
+    width: 100%;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 15px #565252;
+    background-color: #fff;
+}
+
+.article .ly-content {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-image: linear-gradient(to right, #c96edc, #0f829f, #f64f5a);
+    margin-top: 15px;
+    border-radius: 10px;
+    padding: 10px 0 10px 10px;
+    line-height: 40px;
+
+}
+
+.article .ly-content p {
+    font-weight: bolder;
+}
+
+.article .ly-content .pl-time {
+    transform: translateY(-20px);
+    float: right;
+    margin-right: 40px;
+}
+
+.article .ly-content .sc-btn {
+    width: 80px;
+    height: 30px;
+    border: none;
+    background-image: linear-gradient(to right, #18bfe9, #f64f5a, #c96edc);
+    color: #fff;
+    border-radius: 5px;
+    transform: translate(800px, 10px);
+    cursor: pointer;
+}
+
+.article .ly-content #userxx{
+    max-width: 150px;
+    height: 190px;
+    height: auto;
+}
+.article .ly-content #userxx img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #000;
+}

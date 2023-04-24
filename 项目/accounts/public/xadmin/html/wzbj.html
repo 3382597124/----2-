@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../layui.main/dist/css/layui.css">
+    <script src="../../js/jQuery.mini.js"></script>
+    <title>Document</title>
+    <style>
+        #btn-add {
+            position: absolute;
+            top: 20px;
+            left: 150px;
+        }
+
+        .layui-form-item .layui-form-label {
+            width: 100px;
+            padding: none;
+        }
+
+        .layui-form-item .layui-input-block {
+            position: relative;
+        }
+
+        .layui-form-item .layui-input-block .layui-input {
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <table id="demo" lay-filter="test"></table>
+    <!-- 添加的 表单弹出层 -->
+    <div class="site-text" style="margin: 5%; display: none" id="window" target="test123">
+        <form class="layui-form" id="book" method="post" lay-filter="example">
+            <div class="layui-form-item">
+                <label class="layui-form-label">标题：</label>
+                <div class="layui-input-block">
+                    <input type="text" id="title" name="title" lay-verify="title" autocomplete="off"
+                        autofocus="autofocus" placeholder="请输入标题" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">内容：</label>
+                <div class="layui-input-block">
+                    <textarea name="content" id="content" lay-verify="content" cols="30" rows="10"
+                        placeholder="请输入文章内容"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">作者：</label>
+                <div class="layui-input-block">
+                    <input type="text" id="author" name="author" lay-verify="author" autocomplete="off"
+                        placeholder="请输入作者" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">自定义访问量：</label>
+                <div class="layui-input-block">
+                    <input type="text" id="visit" name="visit" lay-verify="visit" autocomplete="off"
+                        placeholder="请输入访问量" class="layui-input">
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <a class="layui-btn layui-btn-sm" id="btn-add">添加文章</a>
+</body>
+<script src="../../layui.main/dist/layui.js"></script>
+
+
+<!--头部工具栏-->
+<script type="text/html" id="toolbarDemo">
+<div class="layui-btn-container" id="container">
+    <a class="layui-btn layui-btn-sm" lay-event="delAll">删除选中行数据</a>
+</div>
+</script>
+
+<!--行内工具栏-->
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+
+<script>
+
+
+
+    layui.use('table', function () {
+        var table = layui.table;
+
+        //第一个实例
+        table.render({
+            elem: '#demo'
+            , height: 312
+            , toolbar: '#toolbarDemo'
+            , url: 'http://127.0.0.1:8080/xadmin/article' //数据接口
+            , limit: 10 //每页默认显示的条数
+            , cols: [[ //表头
+                { type: 'checkbox', fixed: 'left' } //表格的复选框 LAY_CHECKED 表示是否选中了复选框
+                , { field: 'id', title: 'ID', width: 80, sort: true, fixed: 'left' }
+                , { field: 'title', title: '标题' }
+                , { field: 'content', title: '内容' }
+                , { field: 'author', title: '作者' }
+                , { field: 'time', title: '发布时间', sort: true }
+                , { field: 'visit', title: '访问量', sort: true }
+                //行内工具栏
+                , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 150, align: 'center' }
+            ]]
+            , height: 'full-110'
+        });
+
+        //监听行工具事件
+        table.on('tool(test)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'del') {
+                layer.confirm('真的删除行么', function (index) {
+                    $.post('http://127.0.0.1:8080/xadmin/article/delete', { id: data.id }, function (res) {
+                        if (res.status !== 0) {
+                            return console.log(res.message);
+                        }
+                        //关闭该 confirm 窗口
+                        layer.close(index);
+                        // 重载表格
+                        table.reload('demo');
+                    })
+                });
+
+                // 编辑
+            } else if (obj.event === 'edit') {
+                var index = layer.open({
+                    type: 1 //Page层类型
+                    , skin: 'layui-layer-molv'
+                    , area: ['500px', '530px']
+                    , title: ['编辑文章', 'background-image: linear-gradient(to right, #f64f5a ,#c96edc, #18bfe9);font-size:18px ']
+                    , btn: ['确定', '取消编辑']
+                    , shadeClose: true
+                    , shade: 0 //遮罩透明度
+                    , maxmin: true //允许全屏最小化
+                    , content: $("#window")
+                    , success: function (l, i) {
+                        $('#title').val(data.title)
+                        $('#content').val(data.content)
+                        $('#author').val(data.author)
+                        $('#visit').val(data.visit)
+                    }
+                    , yes: function () {
+                        $.post('http://127.0.0.1:8080/xadmin/article/update', { title: $('#title').val(), content: $('#content').val(), author: $('#author').val(), visit: $('#visit').val() == '' ? 0 : $('#visit').val(), id: data.id }, function (res) {
+                            if (res.status !== 0) {
+                                return console.log(res.message);
+                            }
+                            layer.msg('编辑成功', { icon: 6, time: 1000 }, function () {
+                                table.reload('demo');
+                                // 清除val()内容
+                                $("#book")[0].reset();
+                                layer.close(index);
+                            });
+
+                        })
+                    }
+                    , end: function () {
+                        $("#book")[0].reset();
+                    }
+                });
+            }
+        });
+
+        //头工具栏事件
+        table.on('toolbar(test)', function (obj) {
+            var checkStatus = table.checkStatus(obj.config.id);
+            $.each(checkStatus.data, function (index, e) {
+                $.post('http://127.0.0.1:8080/xadmin/article/delete', { id: e.id }, function (res) {
+                    if (res.status !== 0) {
+                        return console.log(res.message);
+                    }
+                    //关闭该 confirm 窗口
+                    layer.close(index);
+                    // 重载表格
+                    table.reload('demo');
+                })
+            })
+
+        });
+
+
+
+
+    });
+
+
+    $('#btn-add').on('click', function () {
+        var table = layui.table;
+        var index = layer.open({
+            type: 1 //Page层类型
+            , skin: 'layui-layer-molv'
+            , area: ['500px', '530px']
+            , title: ['添加文章', 'background-image: linear-gradient(to right, #f64f5a ,#c96edc, #18bfe9);font-size:18px ']
+            , btn: ['添加', '取消添加']
+            , shadeClose: true
+            , shade: 0 //遮罩透明度
+            , maxmin: true //允许全屏最小化
+            , content: $("#window")
+            , yes: function () {
+                var myDate = new Date;
+                var year = myDate.getFullYear(); //获取当前年
+                var mon = myDate.getMonth() + 1; //获取当前月
+                var date = myDate.getDate(); //获取当前日
+                var h = myDate.getHours();//获取当前小时数(0-23)
+                var m = myDate.getMinutes();//获取当前分钟数(0-59)
+                var s = myDate.getSeconds();//获取当前秒
+                const time = year + '年' + mon + '月' + date + '日' + h + '时' + m + '分' + s + '秒'
+                const reg = /^[0-9]*$/
+                if ($('#title').val().trim() == '') {
+                    $('#title').focus()
+                    return layer.msg('请输入标题', { icon: 5, time: 1000 });
+                } else if ($('#content').val().trim() == '') {
+                    $('#content').focus()
+                    return layer.msg('请输入内容', { icon: 5, time: 1000 });
+                } else if ($('#author').val().trim() == '') {
+                    $('#author').focus()
+                    return layer.msg('请输入作者', { icon: 5, time: 1000 });
+                } else if (!reg.test($('#visit').val())) {
+                    $('#author').focus()
+                    return layer.msg('访问量只能为数字,', { icon: 5, time: 1000 });
+                }
+
+
+                $.post('http://127.0.0.1:8080/xadmin/article/insert', { title: $('#title').val(), content: $('#content').val(), time: time, author: $('#author').val(), visit: $('#visit').val() == '' ? 0 : $('#visit').val() }, function (res) {
+                    if (res.status !== 0) {
+                        return console.log(res.message);
+                    }
+                    layer.msg('添加成功', { icon: 6, time: 1000 }, function () {
+                        table.reload('demo');
+                        // 清除val()内容
+                        $("#book")[0].reset();
+                        layer.close(index);
+                    });
+
+                })
+            }
+            , end: function () {
+                $("#book")[0].reset();
+            }
+        });
+    });
+</script>
+
+</html>

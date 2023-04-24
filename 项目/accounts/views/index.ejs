@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+    <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.cn/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+      <script src="https://cdn.jsdelivr.cn/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./font/iconfont.css">
+    <script src="./js/jQuery.mini.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./layui.main/dist/layui.js"></script>
+    <link rel="stylesheet" href="./layui.main/dist/css/layui.css">
+    <script src="./js/index.js"></script>
+    <title>Document</title>
+
+</head>
+
+<body>
+    <div class="title">
+        <div class="title-left">
+            <h2>
+                <%= title[0].title %>
+            </h2>
+
+        </div>
+        <div class="title-right">
+
+            <!-- 放大后的导航栏 -->
+            <ul id="title-right-nav">
+                <% header.forEach(item=> { %>
+                    <li><span class="<%= item.icon %>"></span>
+                        <%= item.name %>
+                    </li>
+                    <% }) %>
+            </ul>
+        </div>
+        <div class="caida">
+            <img src="./img/caida.png" alt="" id="caidaBtn">
+            <div class="neir">
+                <!-- 缩小后的导航栏 -->
+                <ul id="caida-nav">
+                    <% header.forEach(item=> { %>
+                        <li><span class="<%= item.icon %>"></span>
+                            <%= item.name %>
+                        </li>
+                        <% }) %>
+                </ul>
+
+            </div>
+        </div>
+        <div id="tcdl">
+            <div class="tcdl-tx">
+                <img src="/images/Snipaste_2023-04-10_19-33-53.png" alt="">
+            </div>
+            <span>退出登录</span>
+        </div>
+    </div>
+
+    <div class="box w">
+        <div class="box-left">
+
+            <!-- 内容 -->
+            <ul id="box-left-ul">
+                <% artcate.forEach((item,i)=> { %>
+                    <a href="">
+                        <li index=<%=item.id %>>
+                            <h2>
+                                <%= item.title %>
+                            </h2>
+                            <span style="display: none;">/?,</span> <!-- 分割 -->
+
+                            <span id="fwl"><img src="/img/yj.png" alt="">
+                                <%= item.visit %>
+                            </span>
+
+                            <span style="display: none;">/?,</span> <!-- 分割 -->
+
+                            <div class="box-left-neir">
+                                <span>内容：</span>
+                                <%= item.content %>
+                            </div>
+
+                            <span style="display: none;">/?,</span> <!-- 分割 -->
+
+                            <div class="li_bottom">
+                                <span class="s-left">作者：<%= item.author %></span>
+
+                                <span style="display: none;">/?,</span> <!-- 分割 -->
+
+                                <span class="s-right">时间：<%= item.time %></span>
+
+                            </div>
+
+                        </li>
+                    </a>
+                    <% }) %>
+            </ul>
+        </div>
+        <div class="box-right">
+
+            <!-- 个人信息 -->
+            <ul>
+                <li class="li">
+                    <h4 style="font-weight: bolder;">个人信息</h4>
+                    <div class="icon"><img src="/images/Snipaste_2023-04-10_19-33-53.png" alt=""></div>
+                    <h3 style="width: 100%; text-align: center; font-weight: bolder; margin-bottom: 5px;">
+                        用户名
+                    </h3>
+                    <div class="box2">
+                        <div>
+                            文章
+                            <div>
+                                <%= wz %>
+                            </div>
+                        </div>
+                        <div>
+                            标签
+                            <div>31</div>
+                        </div>
+                        <div>
+                            归档
+                            <div>31</div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <!-- 最新文章 -->
+            <ul>
+                <li class="li">
+                    <div class="wz-title">
+                        <h4>最新信息</h4>
+                    </div>
+                    <div class="box3">
+                        <% artcate.forEach((item,i)=> { %>
+                            <div class="box3-x">
+
+                                <!-- 标题 -->
+                                <h2>
+                                    <%= item.title %>
+                                </h2>
+
+
+                                <div class="box3-x-fwl">
+                                    <!-- 访问量 -->
+                                    <div class="box3-x-fwl-tp">
+                                            <img src="/img/yj.png" alt="">
+                                        
+                                    </div>
+                                    <span><%= item.visit %></span>
+                                </div>
+
+
+
+
+                                <!-- 内容 -->
+                                <div class="neiro">
+                                    <%= item.content %>
+                                </div>
+
+                                <!-- 时间 -->
+                                <div class="zx-time">
+                                    <%= item.time %>
+                                </div>
+                            </div>
+                            <% }) %>
+                    </div>
+                </li>
+            </ul>
+
+
+            <!-- 返回顶层 -->
+            <div id="fahui">
+                <span class="iconfont icon-shengdanfanhuidingbu"></span>
+            </div>
+
+            <!-- 表单弹出层 -->
+            <div class="site-text" style="margin: 5%; display: none" id="window" target="test123">
+                <form class="layui-form" id="book" method="post" lay-filter="example">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">标题：</label>
+                        <div class="layui-input-block">
+                            <input type="text" id="title" name="title" lay-verify="title" autocomplete="off"
+                                autofocus="autofocus" placeholder="请输入标题" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">内容：</label>
+                        <div class="layui-input-block">
+                            <textarea name="content" id="content" cols="30" rows="10" placeholder="请输入内容"></textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">作者：</label>
+                        <div class="layui-input-block">
+                            <input type="text" id="author" name="author" lay-verify="title" autocomplete="off"
+                                placeholder="请输入作者" class="layui-input">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+
+</body>
+
+
+</html>

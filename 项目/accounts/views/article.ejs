@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+    <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.cn/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+      <script src="https://cdn.jsdelivr.cn/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/article.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/font/iconfont.css">
+    <link rel="stylesheet" href="/layui.main/dist/css/layui.css">
+    <script src="/js/jQuery.mini.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/layui.main/dist/layui.js"></script>
+    <script src="/js/article.js"></script>
+
+</head>
+
+<body>
+    <div class="title">
+        <div class="title-left">
+            <h2>博客-zhang's Blog</h2>
+        </div>
+        <div class="title-right">
+
+            <!-- 放大后的导航栏 -->
+            <ul id="title-right-nav">
+                <% header.forEach(item=> { %>
+                    <li><span class="<%= item.icon %>"></span>
+                        <%= item.name %>
+                    </li>
+                    <% }) %>
+            </ul>
+        </div>
+        <div class="caida">
+            <img src="/img/caida.png" alt="" id="caidaBtn">
+            <div class="neir">
+                <!-- 缩小后的导航栏 -->
+                <ul id="caida-nav">
+                    <% header.forEach(item=> { %>
+                        <li><span class="<%= item.icon %>"></span>
+                            <%= item.name %>
+                        </li>
+                        <% }) %>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="article w">
+
+        <div class="article-top">
+            <h1>
+                <%= article.title %>
+            </h1>
+            <p>发布时间：<%= article.time %>
+            </p>
+            <p>作者：<%= article.author %>
+            </p>
+            <p>浏览量：<%= article.visit %>
+            </p>
+        </div>
+        <div class="article-bottom">
+            <h1>
+                <%= article.title %>
+            </h1>
+            <div id="article-bottom-content" style="text-indent:2em; white-space:pre-line;">
+                <%= article.content %>
+                    <div class="pl">
+                        <button id="article-btn">发布评论</button>
+                    </div>
+            </div>
+
+        </div>
+        <div class="ly">
+            <p>
+            <h2 style="font-weight: bolder;">评论区</h2>
+            </p>
+            <p style="width: 100%; border-bottom: 1px solid #000;"></p>
+            <ul>
+                <% pl.forEach((item,i)=> { %>
+                    <li class="ly-content">
+
+                        <div id="userxx">
+                            <img src="<%= item.images %>" alt="">
+                            <%= item.username %>
+                        </div>
+                        <P>
+                            <span>
+                                <%= item.plContent%>
+                            </span>
+                        </P>
+                        <p class="pl-time">评论时间：<%= item.time %>
+                        </p>
+                        <% if (item.id === aid) { %>
+                            <button class="sc-btn" index=<%=item.id%>>删除评论</button>
+                            <% } %>
+
+
+
+
+                    </li>
+                    <% }) %>
+            </ul>
+        </div>
+    </div>
+    <!-- 表单弹出层 -->
+    <div class="site-text" style="margin: 5%; display: none" id="window" target="test123">
+        <form class="layui-form" id="book" method="post" lay-filter="example">
+            <div class="layui-form-item">
+                <label class="layui-form-label">评论内容：</label>
+                <div class="layui-input-block">
+
+                    <textarea name="content" id="content" lay-verify="content" cols="30" rows="10"
+                        placeholder="请输入评论"></textarea>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../layui.main/dist/css/layui.css">
+    <script src="../../js/jQuery.mini.js"></script>
+    <title>Document</title>
+    <style>
+        #btn-add {
+            position: absolute;
+            top: 20px;
+            left: 150px;
+        }
+    </style>
+</head>
+
+<body>
+    <table id="demo" lay-filter="test"></table>
+    <!-- 添加的 表单弹出层 -->
+    <div class="site-text" style="margin: 5%; display: none" id="window1" target="test123">
+        <form class="layui-form" id="book1" method="post" lay-filter="example">
+            <div class="layui-form-item">
+                <label class="layui-form-label">菜单名：</label>
+                <div class="layui-input-block">
+                    <input type="text" id="name" name="name" lay-verify="name" autocomplete="off" autofocus="autofocus"
+                        placeholder="请输入菜单名" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">字体图标：</label>
+                <div class="layui-input-block">
+                    <input type="text" id="icon" name="icon" lay-verify="icon" autocomplete="off" placeholder="请输入字体图标"
+                        class="layui-input">
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <a class="layui-btn layui-btn-sm" id="btn-add">添加菜单</a>
+</body>
+<script src="../../layui.main/dist/layui.js"></script>
+
+
+<!--头部工具栏-->
+<script type="text/html" id="toolbarDemo">
+<div class="layui-btn-container" id="container">
+    <a class="layui-btn layui-btn-sm" lay-event="delAll">删除选中行数据</a>
+</div>
+</script>
+
+<!--行内工具栏-->
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+
+<script>
+    // 添加
+    $('#btn-add').on('click', function () {
+        var table = layui.table;
+        var index = layer.open({
+
+            type: 1 //Page层类型
+            , skin: 'layui-layer-molv'
+            , area: ['500px', '330px']
+            , title: ['添加菜单', 'background-image: linear-gradient(to right, #f64f5a ,#c96edc, #18bfe9);font-size:18px ']
+            , btn: ['添加', '取消添加']
+            , shadeClose: true
+            , shade: 0 //遮罩透明度
+            , maxmin: true //允许全屏最小化
+            , content: $("#window1")
+            , yes: function () {
+                if ($('#name').val().trim() == '') {
+                    return layer.msg('菜单名不能为空', { icon: 2, time: 1000 });
+                }
+                $.post('http://127.0.0.1:8080/xadmin/blogs/insert', { name: $('#name').val(), icon: $('#font').val() }, function (res) {
+                    if (res.status !== 0) {
+                        return console.log(res.message);
+                    }
+                    layer.msg('添加成功', { icon: 6, time: 1000 }, function () {
+                        table.reload('demo');
+                        $("#book1")[0].reset();
+                        layer.close(index);
+
+                    });
+
+                })
+            }
+        });
+    });
+
+    layui.use('table', function () {
+        var table = layui.table;
+
+        //第一个实例
+        table.render({
+            elem: '#demo'
+            , height: 312
+            , toolbar: '#toolbarDemo'
+            , url: 'http://127.0.0.1:8080/xadmin/menus' //数据接口
+            , limit: 10 //每页默认显示的条数
+            , cols: [[ //表头
+                { type: 'checkbox', fixed: 'left' } //表格的复选框 LAY_CHECKED 表示是否选中了复选框
+                , { field: 'id', title: 'ID', width: 80, sort: true, fixed: 'left' }
+                , { field: 'name', title: '菜单名' }
+                , { field: 'icon', title: '菜单的字体图标', sort: true }
+                //行内工具栏
+                , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 150, align: 'center' }
+            ]]
+            , height: 'full-110'
+        });
+
+        //监听行工具事件
+        table.on('tool(test)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'del') {
+                layer.confirm('真的删除行么', function (index) {
+
+                    $.post('http://127.0.0.1:8080/xadmin/blogs/delete', { id: data.id }, function (res) {
+                        if (res.status !== 0) {
+                            return console.log(res.message);
+                        }
+                        //关闭该 confirm 窗口
+                        layer.close(index);
+                        // 重载表格
+                        table.reload('demo');
+                    })
+                });
+            } else if (obj.event === 'edit') {
+                var index = layer.open({
+                    type: 1 //Page层类型
+                    , skin: 'layui-layer-molv'
+                    , area: ['500px', '530px']
+                    , title: ['编辑菜单栏', 'background-image: linear-gradient(to right, #f64f5a ,#c96edc, #18bfe9);font-size:18px ']
+                    , btn: ['确定', '取消编辑']
+                    , shadeClose: true
+                    , shade: 0 //遮罩透明度
+                    , maxmin: true //允许全屏最小化
+                    , content: $("#window1")
+                    , success: function (l, i) {
+                        $('#name').val(data.name)
+                        $('#icon').val(data.icon)
+                    }
+                    , yes: function () {
+                        $.post('http://127.0.0.1:8080/xadmin/caida/update', { name: $("#name").val(), icon: $("#icon").val(), id: data.id }, function (res) {
+                            if (res.status !== 0) {
+                                return console.log(res.message);
+                            }
+                            layer.msg('编辑成功', { icon: 6, time: 1000 }, function () {
+                                table.reload('demo');
+                                // 清除val()内容
+                                $("#book1")[0].reset();
+                                layer.close(index);
+                            });
+
+                        })
+                    }
+                    , end: function () {
+                        $("#book1")[0].reset();
+                    }
+                });
+            }
+        });
+
+        //头工具栏事件
+        table.on('toolbar(test)', function (obj) {
+            var checkStatus = table.checkStatus(obj.config.id);
+            $.each(checkStatus.data, function (index, e) {
+                console.log(e.id);
+                $.post('http://127.0.0.1:8080/xadmin/blogs/delete', { id: e.id }, function (res) {
+                    if (res.status !== 0) {
+                        return console.log(res.message);
+                    }
+                    //关闭该 confirm 窗口
+                    layer.close(index);
+                    // 重载表格
+                    table.reload('demo');
+                })
+            })
+            console.log(arr);
+
+        });
+
+
+
+
+    });
+
+</script>
+
+</html>

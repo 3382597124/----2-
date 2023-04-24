@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>博客管理后台</title>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+        content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/css/xadmin-font.css">
+    <link rel="stylesheet" href="/css/xadmin.css">
+    <script src="/js/jQuery.mini.js"></script>
+    <script src="/layui.main/dist/layui.js"></script>
+    <script type="text/javascript" src="/js/xadmin.js"></script>
+    <style>
+        .top-r{
+            position: absolute;
+            width: 100px;
+            right: 0;
+        }
+        .top-r span{
+            font-size: 16px;
+            display: block;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+        .top-r a{
+            font-size: 16px;
+            color: #fff;
+            margin-right: 10px;
+        }
+        .top-r a:hover{
+            color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <!-- 顶部开始 -->
+    <div class="container">
+        <div class="logo"><a href="/index.html">博客管理后台</a></div>
+        <div class="left_open">
+            <i title="展开左侧栏" class="iconfont">&#xe699;</i>
+        </div>
+        <ul class="layui-nav left fast-add" lay-filter="">
+            <li class="layui-nav-item">
+                <dl class="layui-nav-child">
+                </dl>
+            </li>
+        </ul>
+        <div class="top-r">
+            <span>张三欢迎您!</span>
+            <a href="#">安全</a>
+            <a href="javascript:;" class="tc" id="tc">退出</a>
+        </div>
+
+    </div>
+    <!-- 顶部结束 -->
+    <!-- 中部开始 -->
+    <!-- 左侧菜单开始 -->
+    <div class="left-nav">
+        <div id="side-nav">
+            <ul id="nav">
+                <li>
+                    <a href="javascript:;">
+                        <i class="iconfont">&#xe6b8;</i>
+                        <cite>头部修改</cite>
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a _href="/xadmin/html/bkmxg.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                <cite>博客名修改</cite>
+
+                            </a>
+                        </li>
+                        <li>
+                            <a _href="/xadmin/html/cdxg.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                <cite>菜单栏修改</cite>
+
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                        <i class="iconfont">&#xe6b8;</i>
+                        <cite>文章操作</cite>
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a _href="/xadmin/html/wzbj.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                <cite>文章操作</cite>
+
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                        <i class="iconfont">&#xe6b8;</i>
+                        <cite>用户管理</cite>
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a _href="/xadmin/html/yhgl.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                <cite>操作用户</cite>
+
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+        </div>
+    </div>
+    <div class="page-content">
+        <div class="layui-tab tab" lay-filter="xbs_tab" lay-allowclose="false">
+            <ul class="layui-tab-title">
+                <li>首页</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <iframe src='/xadmin/html/index1.html' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-content-bg"></div>
+</body>
+
+</html>
